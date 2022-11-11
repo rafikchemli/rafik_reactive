@@ -19,11 +19,11 @@ Companies <br> worked
 
 
 * SERVICES
-services__modal-service
-I develop the user interface.
-Web page development.
-I create ux element interactions.
-I position your company brand.
+
+Modeling & Predictions  <i class="uil uil-robot"></i>
+Dashboard development <i class="uil uil-window-grid"></i>
+Statistical Data Analysis  <i class="uil uil-chart-line"></i>
+Web dev & automation <i class="uil uil-arrow"></i>
 
 
 * PORTFOLIO
