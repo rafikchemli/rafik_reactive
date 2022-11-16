@@ -59,13 +59,13 @@
 /* Font size for large devices */
 @media screen and (min-width: 968px) {
     :root {
-        --big-font-size: 3rem;
-        --h1-font-size: 2.25rem;
-        --h2-font-size: 1.5rem;
-        --h3-font-size: 1.25rem;
-        --normal-font-size: 1rem;
-        --small-font-size: .875rem;
-        --smaller-font-size: .813rem;
+        --big-font-size: 2rem;
+        --h1-font-size: 1.5rem;
+        --h2-font-size: 1.25rem;
+        --h3-font-size: 1.125rem;
+        --normal-font-size: .938rem;
+        --small-font-size: .813rem;
+        --smaller-font-size: .75rem;
     }
 }
 
@@ -1162,7 +1162,7 @@ img{
         font-size: 2rem;
     }
     .services__content{
-        padding: 6rem 0 2rem 2.5rem;
+        padding: 6rem 1rem 2rem 2.5rem;
     }
     .services__modal-content{
         width: 450px;
