@@ -766,6 +766,7 @@ img{
 /*==================== PORTFOLIO ====================*/
 .portfolio__container{
     overflow: initial;
+    position: relative;
 }
 
 .portfolio__content{
@@ -791,6 +792,39 @@ img{
     transform: translateX(.25rem);
 }
 
+/* Amélioration de la visibilité des transitions */
+.swiper-slide {
+    opacity: 0.2; /* Opacité encore plus faible */
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.swiper-slide-active {
+    opacity: 1;
+}
+
+.swiper-slide-next,
+.swiper-slide-prev {
+    opacity: 0.2; /* Opacité encore plus faible */
+}
+
+/* Augmenter la taille des icones de navigation */
+.swiper-portfolio-icon {
+    font-size: 2.5rem; /* Agrandir les icônes */
+    color: var(--first-color);
+}
+
+.swiper-button-prev,
+.swiper-button-next{
+    opacity: 0.8; /* Augmenter l'opacité des flèches */
+    transition: opacity 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+    opacity: 1;
+}
+
+/* Navigation buttons */
 .swiper-button-prev::after,
 .swiper-button-next::after{
     content: "";
@@ -813,8 +847,16 @@ img{
     bottom: -2.5rem;
 }
 
+.swiper-pagination-bullet{
+    background-color: var(--text-color-light);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
 .swiper-pagination-bullet-active{
     background-color: var(--first-color);
+    opacity: 1;
+    transform: scale(1.2);
 }
 
 .swiper-button-prev,

@@ -121,17 +121,48 @@ modalViews.forEach((modalView, index) => {
 
 /*==================== PORTFOLIO SWIPER  ====================*/
 let swiper = new Swiper(".portfolio__container", {
-    cssMode: true,
+    cssMode: false, // Désactiver cssMode pour avoir de vraies transitions
     loop: true,
+    speed: 600,
+    spaceBetween: 30,
+    grabCursor: true,
+    
+    // Navigation
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
+    
+    // Pagination
     pagination: {
         el: ".swiper-pagination",
         clickable: true,
+        dynamicBullets: true,
     },
+    
+    // Autoplay
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+    
+    // Effet de transition
+    effect: 'slide', // Effet de glissement classique
+    
+    // Pour mobile
+    breakpoints: {
+        568: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+        },
+        768: {
+            slidesPerView: 1,
+            spaceBetween: 48,
+        },
+    }
 });
+
 
 /*==================== TESTIMONIAL ====================*/
 
