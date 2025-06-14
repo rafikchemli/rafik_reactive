@@ -73,33 +73,49 @@ tabs.forEach(tab =>{
 /*==================== SERVICES MODAL ====================*/
 const modalViews = document.querySelectorAll('.services__modal'),
     modalBtns = document.querySelectorAll('.services__button'),
-    // modalContent = document.querySelectorAll('.services__content'),
     modalCloses = document.querySelectorAll('.services__modal-close');
 
-let modal = function (modalClick){
-    modalViews[modalClick].classList.add('active-modal');
+console.log('Modal elements found:', {
+    modals: modalViews.length,
+    buttons: modalBtns.length,
+    closeButtons: modalCloses.length
+}); // Debug
+
+let modal = function (modalClick) {
+    console.log('Opening modal:', modalClick); // Debug
+    if (modalViews[modalClick]) {
+        modalViews[modalClick].classList.add('active-modal');
+        console.log('Modal classes:', modalViews[modalClick].className); // Debug
+    } else {
+        console.error('Modal not found at index:', modalClick);
+    }
 };
 
-
-modalBtns.forEach((modalBtn, i)=>{
-    modalBtn.addEventListener('click', ()=>{
+modalBtns.forEach((modalBtn, i) => {
+    modalBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Ajout pour empêcher le comportement par défaut
+        e.stopPropagation();
+        console.log('Button clicked:', i); // Debug
         modal(i);
-    })
+    });
 });
 
-
-modalCloses.forEach(modalClose => {
-    modalClose.addEventListener('click', () =>{
-        modalViews.forEach((modalView) =>{
+modalCloses.forEach((modalClose, index) => {
+    modalClose.addEventListener('click', () => {
+        console.log('Close button clicked for modal:', index); // Debug
+        modalViews.forEach((modalView) => {
             modalView.classList.remove('active-modal');
         });
     });
 });
 
-modalViews.forEach(modalView => {
-    modalView.addEventListener
-    ('click', () =>  {modalViews.forEach( (modalView) =>{modalView.classList.remove('active-modal');});}       
-    );
+modalViews.forEach((modalView, index) => {
+    modalView.addEventListener('click', (event) => {
+        if (!event.target.closest('.services__modal-content')) {
+            console.log('Clicked outside modal content:', index); // Debug
+            modalView.classList.remove('active-modal');
+        }
+    });
 });
 
 
