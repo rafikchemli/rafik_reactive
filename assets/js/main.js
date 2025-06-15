@@ -82,7 +82,11 @@ console.log('Modal elements found:', {
 }); // Debug
 
 let modal = function (modalClick) {
-    console.log('Opening modal:', modalClick); // Debug
+    // Fermer tous les modals avant d'en ouvrir un nouveau
+    modalViews.forEach((modalView) => {
+        modalView.classList.remove('active-modal');
+    });
+    // Ouvrir le modal demandé
     if (modalViews[modalClick]) {
         modalViews[modalClick].classList.add('active-modal');
         console.log('Modal classes:', modalViews[modalClick].className); // Debug
@@ -114,6 +118,17 @@ modalViews.forEach((modalView, index) => {
         if (!event.target.closest('.services__modal-content')) {
             console.log('Clicked outside modal content:', index); // Debug
             modalView.classList.remove('active-modal');
+        }
+    });
+});
+
+// Fermer le modal quand on clique sur le bouton "Schedule Now" à l'intérieur du modal
+document.querySelectorAll('.services__modal-content a.button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Trouver le parent modal et le fermer
+        let modal = this.closest('.services__modal');
+        if (modal) {
+            modal.classList.remove('active-modal');
         }
     });
 });

@@ -698,6 +698,8 @@ img{
     opacity: 0;
     visibility: hidden;
     transition: .3s;
+    /* Ajout pour permettre le scroll si le contenu est trop grand */
+    overflow-y: auto;
 }
 
 .services__modal-content{
