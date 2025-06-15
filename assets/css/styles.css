@@ -116,6 +116,7 @@ body{
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
     color: var(--text-color);
+    overflow-x: hidden;
 }
 
 h1,h2,h3,h4{
@@ -767,6 +768,8 @@ img{
 .portfolio__container{
     overflow: initial;
     position: relative;
+    /* max-width: 100vw; */ /* Supprimer cette ligne */
+    /* Le parent .container limite déjà la largeur */
 }
 
 .portfolio__content{
@@ -794,7 +797,7 @@ img{
 
 /* Amélioration de la visibilité des transitions */
 .swiper-slide {
-    opacity: 0.2; /* Opacité encore plus faible */
+    opacity: 0.05; /* Encore plus transparent */
     transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -804,7 +807,7 @@ img{
 
 .swiper-slide-next,
 .swiper-slide-prev {
-    opacity: 0.2; /* Opacité encore plus faible */
+    opacity: 0.12; /* Un peu plus visible que les autres, mais très faible */
 }
 
 /* Augmenter la taille des icones de navigation */
@@ -836,11 +839,11 @@ img{
 }
 
 .swiper-button-prev{
-    left: -.5rem;
+    left: 0.5rem;
 }
 
 .swiper-button-next{
-    right: -.5rem;
+    right: 0.5rem;
 }
 
 .swiper-container-horizontal > .swiper-pagination-bullets{
