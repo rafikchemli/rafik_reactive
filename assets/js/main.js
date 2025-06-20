@@ -260,3 +260,56 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+/*==================== UMAMI CUSTOM TRACKING ====================*/
+// Track important button clicks (Book an appointment, Get in touch)
+document.querySelectorAll('a.button--flex').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Identify booking or contact buttons by href
+        const href = btn.getAttribute('href') || '';
+        let eventName = '';
+        if (href.includes('calendar.google.com')) {
+            eventName = 'booking_button_click';
+        } else if (href.includes('mailto:') || href.includes('#contact') || btn.textContent.toLowerCase().includes('get in touch')) {
+            eventName = 'contact_button_click';
+        }
+        if (eventName && typeof window.umami === 'function') {
+            window.umami(eventName, { href, text: btn.textContent.trim(), location: window.location.pathname });
+        }
+    });
+});
+
+// Track section view and time spent
+(function() {
+    if (typeof window.IntersectionObserver !== 'function') return;
+    const sectionTimes = {};
+    const enterTimes = {};
+    document.querySelectorAll('section[id]').forEach(section => {
+        const sectionId = section.id;
+        sectionTimes[sectionId] = 0;
+        enterTimes[sectionId] = null;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    enterTimes[sectionId] = Date.now();
+                } else if (enterTimes[sectionId]) {
+                    const timeSpent = (Date.now() - enterTimes[sectionId]) / 1000;
+                    sectionTimes[sectionId] += timeSpent;
+                    if (typeof window.umami === 'function') {
+                        window.umami('section_view', { section: sectionId, time_spent: timeSpent, location: window.location.pathname });
+                    }
+                    enterTimes[sectionId] = null;
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(section);
+    });
+    // Optionally, send time spent on all sections when user leaves the page
+    window.addEventListener('beforeunload', function() {
+        Object.keys(sectionTimes).forEach(sectionId => {
+            if (sectionTimes[sectionId] > 0 && typeof window.umami === 'function') {
+                window.umami('section_total_time', { section: sectionId, total_time: sectionTimes[sectionId], location: window.location.pathname });
+            }
+        });
+    });
+})();
