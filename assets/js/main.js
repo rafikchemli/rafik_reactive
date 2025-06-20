@@ -75,6 +75,17 @@ const modalViews = document.querySelectorAll('.services__modal'),
     modalBtns = document.querySelectorAll('.services__button'),
     modalCloses = document.querySelectorAll('.services__modal-close');
 
+// Add: Also allow clicking the entire .services__content to open the modal
+const serviceContents = document.querySelectorAll('.services__content');
+serviceContents.forEach((serviceContent, i) => {
+    serviceContent.addEventListener('click', function(e) {
+        // Prevent double opening if the button is clicked (since it bubbles up)
+        if (e.target.closest('.services__button')) return;
+        // Open the modal corresponding to this service
+        modal(i);
+    });
+});
+
 console.log('Modal elements found:', {
     modals: modalViews.length,
     buttons: modalBtns.length,
